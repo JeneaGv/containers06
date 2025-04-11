@@ -112,3 +112,56 @@ MYSQL_PASSWORD=secret
 introducem in bara de navigare adresa http://localhost:
 
 ![image](https://github.com/user-attachments/assets/4810a9f0-cb94-4f92-b7b2-d30e1d3cdf58)
+
+# Raspunsuri la intrebari 
+
+1. În ce ordine sunt pornite containerele?
+Docker Compose pornește containerele conform dependințelor definite în fișierul docker-compose.yml. În acest caz specific, deși nu există directive explicite depends_on, Docker Compose va încerca să pornească containerele în ordinea definită în fișier:
+
+frontend (nginx)
+
+backend (php-fpm)
+
+database (mysql)
+
+2. Unde sunt stocate datele bazei de date?
+
+Datele bazei de date sunt stocate într-un volum Docker numit db_data. 
+
+Acest volum este definit în secțiunea volumes a fișierului docker-compose.yml și atașat la serviciul database
+
+3.Cum se numesc containerele proiectului?
+
+Containerele poarta nume de : 
+
+![image](https://github.com/user-attachments/assets/ce1f178f-8ef5-4608-bc12-2b06d9807ca9)
+
+4.Trebuie să adăugați încă un fișier app.env cu variabila de mediu APP_VERSION pentru serviciile backend și frontend. Cum se face acest lucru?
+
+Pentru a adăuga un nou fișier de variabile de mediu, trebuie să:
+
+Creezm fișierul app.env în rădăcina proiectului cu conținutul:
+APP_VERSION=1.0
+
+Modifici fișierul docker-compose.yml pentru a include acest fișier în configurația serviciilor:
+yamlfrontend:
+  image: nginx:1.19
+  ...
+  
+  ...
+  env_file:
+    - app.env
+
+backend:
+  image: php:7.4-fpm
+  ... 
+
+  ...
+
+
+  env_file:
+    - mysql.env
+    - app.env
+
+
+Acest lucru va face ca variabila APP_VERSION să fie disponibilă în ambele containere.
