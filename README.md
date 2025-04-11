@@ -165,3 +165,14 @@ backend:
 
 
 Acest lucru va face ca variabila APP_VERSION să fie disponibilă în ambele containere.
+
+# Concluzii
+Lucrarea practică a demonstrat eficiența Docker Compose în gestionarea aplicațiilor multi-container. 
+
+Separarea componentelor (Nginx, PHP-FPM, MySQL) în containere distincte oferă o arhitectură modulară și ușor de întreținut.
+
+Utilizarea volumelor asigură persistența datelor, iar rețelele Docker facilitează comunicarea securizată între componente. 
+
+Configurarea prin variabile de mediu și fișiere externe permite adaptarea ușoară la diferite scenarii de implementare. 
+
+Această abordare containerizată asigură un mediu de dezvoltare consistent și reproductibil, eliminând diferențele dintre mediile de dezvoltare și producție.
